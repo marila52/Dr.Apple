@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "112241173585",
+    "project_id": "drapple-35762",
+    "storage_bucket": "drapple-35762.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112241173585:android:a9ff75f3f803b74ac2c470",
+        "android_client_info": {
+          "package_name": "com.company.drapple"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGIzFblQE_78kiiqGC_nQOzGu2Ha60zlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112241173585:android:1008880b33bdf950c2c470",
+        "android_client_info": {
+          "package_name": "com.example.dr_apple"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGIzFblQE_78kiiqGC_nQOzGu2Ha60zlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
