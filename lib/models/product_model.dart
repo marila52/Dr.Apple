@@ -42,7 +42,7 @@ class Product {
       fiber: json['fiber'] != null ? (json['fiber'] as num).toDouble() : null,
       barcode: json['barcode'] as String?,
       imageUrl: json['imageUrl'] as String?,
-      isCustom: json['isCustom'] as bool,
+      isCustom: json['isCustom'] == 1,  // ← int → bool
       userId: json['userId'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
@@ -50,22 +50,22 @@ class Product {
 
   // Преобразование в JSON
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'brand': brand,
-      'calories': calories,
-      'proteins': proteins,
-      'fats': fats,
-      'carbs': carbs,
-      'fiber': fiber,
-      'barcode': barcode,
-      'imageUrl': imageUrl,
-      'isCustom': isCustom,
-      'userId': userId,
-      'createdAt': createdAt.toIso8601String(),
-    };
-  }
+  return {
+    'id': id,
+    'name': name,
+    'brand': brand,
+    'calories': calories,
+    'proteins': proteins,
+    'fats': fats,
+    'carbs': carbs,
+    'fiber': fiber,
+    'barcode': barcode,
+    'imageUrl': imageUrl,
+    'isCustom': isCustom ? 1 : 0,  // ← bool → int (1/0)
+    'userId': userId,
+    'createdAt': createdAt.toIso8601String(),
+  };
+}
 
   // Создание из данных Open Food Facts
   factory Product.fromOpenFoodFacts(Map<String, dynamic> json) {

@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
-import 'register_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
   bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<CustomAuthProvider>(context);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Регистрация'),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -28,11 +32,11 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             Text(
-              'Ваш дневник питания',
+              'Создайте аккаунт',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(height: 40),
-            
+
             // Email поле
             TextField(
               controller: emailController,
@@ -44,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
               keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(height: 16),
-            
+
             // Пароль поле
             TextField(
               controller: passwordController,
@@ -64,6 +68,28 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               obscureText: _obscurePassword,
+            ),
+            SizedBox(height: 16),
+
+            // Подтверждение пароля
+            TextField(
+              controller: confirmPasswordController,
+              decoration: InputDecoration(
+                labelText: 'Подтвердите пароль',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock_outline),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureConfirmPassword = !_obscureConfirmPassword;
+                    });
+                  },
+                ),
+              ),
+              obscureText: _obscureConfirmPassword,
             ),
             SizedBox(height: 24),
 
@@ -91,35 +117,60 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             SizedBox(height: 16),
 
-            // Кнопка входа
+            // Кнопка регистрации
             authProvider.isLoading
                 ? CircularProgressIndicator()
                 : Column(
                     children: [
                       ElevatedButton(
                         onPressed: () async {
-                          bool success = await authProvider.signIn(
+                          // Валидация
+                          if (passwordController.text != confirmPasswordController.text) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Пароли не совпадают'),
+                                backgroundColor: Colors.orange,
+                              ),
+                            );
+                            return;
+                          }
+                          
+                          if (passwordController.text.length < 6) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Пароль должен быть минимум 6 символов'),
+                                backgroundColor: Colors.orange,
+                              ),
+                            );
+                            return;
+                          }
+
+                          // Попытка регистрации
+                          bool success = await authProvider.register(
                             emailController.text,
                             passwordController.text,
                           );
-                          if (!success) {
-                            // Ошибка уже в authProvider.errorMessage
+                          
+                          if (success) {
+                            // Если успешно - ничего не делаем, провайдер сам переключит на HomeScreen
                           }
                         },
                         style: ElevatedButton.styleFrom(
                           minimumSize: Size(double.infinity, 50),
+                          backgroundColor: Colors.green,
                         ),
-                        child: Text('Войти'),
+                        child: Text(
+                          'Зарегистрироваться',
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ),
+                      SizedBox(height: 16),
                       TextButton(
                         onPressed: () {
                           authProvider.clearError();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => RegisterScreen()),
-                          );
+                          Navigator.pop(context); // Вернуться на вход
                         },
-                        child: Text('Нет аккаунта? Зарегистрироваться'),
+                        child: Text('Уже есть аккаунт? Войти'),
                       ),
                     ],
                   ),

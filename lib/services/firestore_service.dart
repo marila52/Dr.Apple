@@ -110,7 +110,7 @@ class FirestoreService {
       final snapshot = await _firestore
           .collection('products')
           .where('name', isGreaterThanOrEqualTo: query)
-          .where('name', isLessThanOrEqualTo: query + 'z')
+          .where('name', isLessThanOrEqualTo: '${query}z')
           .limit(20)
           .get();
       

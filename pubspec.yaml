@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+
   flutter:
     sdk: flutter
   
@@ -39,6 +40,8 @@ dependencies:
   # Локальная база данных
   sqflite: ^2.4.2
   path: ^1.9.1
+  
+  sqflite_common_ffi: ^2.3.4
   
   # Для работы с файлами
   path_provider: ^2.1.5
