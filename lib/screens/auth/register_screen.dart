@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
+import '../welcome_screen.dart';
+import 'login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -19,162 +22,187 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final authProvider = Provider.of<CustomAuthProvider>(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Регистрация'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xFF3D2B1F)),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => WelcomeScreen()),
+            );
+          },
+        ),
+        title: Text(
+          'Регистрация',
+          style: GoogleFonts.robotoMono(color: Color(0xFF3D2B1F)),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Dr. Apple',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Создайте аккаунт',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            SizedBox(height: 40),
-
-            // Email поле
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(24.0),
+          child: Column(
+            children: [
+              // Картинка
+              Image.asset(
+                'assets/images/dr_apple_reg.png',
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
               ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(height: 16),
-
-            // Пароль поле
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
-                labelText: 'Пароль',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscurePassword ? Icons.visibility : Icons.visibility_off,
+              SizedBox(height: 20),
+              // Email поле
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  prefixIcon: Icon(Icons.email, color: Color(0xFF3D2B1F)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
+                keyboardType: TextInputType.emailAddress,
               ),
-              obscureText: _obscurePassword,
-            ),
-            SizedBox(height: 16),
-
-            // Подтверждение пароля
-            TextField(
-              controller: confirmPasswordController,
-              decoration: InputDecoration(
-                labelText: 'Подтвердите пароль',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock_outline),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
+              SizedBox(height: 16),
+              // Пароль
+              TextField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Пароль',
+                  prefixIcon: Icon(Icons.lock, color: Color(0xFF3D2B1F)),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      color: Color(0xFF3D2B1F),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _obscureConfirmPassword = !_obscureConfirmPassword;
-                    });
-                  },
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
+                obscureText: _obscurePassword,
               ),
-              obscureText: _obscureConfirmPassword,
-            ),
-            SizedBox(height: 24),
-
-            // Сообщение об ошибке
-            if (authProvider.errorMessage != null)
-              Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.red.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.red.shade200),
+              SizedBox(height: 16),
+              // Подтверждение пароля
+              TextField(
+                controller: confirmPasswordController,
+                decoration: InputDecoration(
+                  labelText: 'Подтвердите пароль',
+                  prefixIcon: Icon(Icons.lock_outline, color: Color(0xFF3D2B1F)),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+                      color: Color(0xFF3D2B1F),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureConfirmPassword = !_obscureConfirmPassword;
+                      });
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
-                child: Row(
-                  children: [
-                    Icon(Icons.error, color: Colors.red),
-                    SizedBox(width: 8),
-                    Expanded(
+                obscureText: _obscureConfirmPassword,
+              ),
+              SizedBox(height: 24),
+              // Ошибка
+              if (authProvider.errorMessage != null)
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.red.shade50,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Text(
+                    authProvider.errorMessage!,
+                    style: TextStyle(color: Colors.red.shade900),
+                  ),
+                ),
+              SizedBox(height: 16),
+              // Кнопка регистрации (тёмная)
+              authProvider.isLoading
+                  ? CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3D2B1F)),
+                    )
+                  : ElevatedButton(
+                      onPressed: () async {
+                        if (passwordController.text.length < 6) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Пароль должен быть минимум 6 символов'),
+                              backgroundColor: Colors.orange,
+                            ),
+                          );
+                          return;
+                        }
+                        if (passwordController.text != confirmPasswordController.text) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Пароли не совпадают'),
+                              backgroundColor: Colors.orange,
+                            ),
+                          );
+                          return;
+                        }
+                        bool success = await authProvider.register(
+                          emailController.text.trim(),
+                          passwordController.text.trim(),
+                        );
+                        if (!success) {}
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 55),
+                        backgroundColor: Color(0xFF3D2B1F),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                       child: Text(
-                        authProvider.errorMessage!,
-                        style: TextStyle(color: Colors.red.shade900),
+                        'Зарегистрироваться',
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ],
+              SizedBox(height: 16),
+              TextButton(
+                onPressed: () {
+                  authProvider.clearError();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  foregroundColor: Color(0xFF3D2B1F),
+                ),
+                child: Text(
+                  'Уже есть аккаунт? Войти',
+                  style: GoogleFonts.robotoMono(fontSize: 16),
                 ),
               ),
-            SizedBox(height: 16),
-
-            // Кнопка регистрации
-            authProvider.isLoading
-                ? CircularProgressIndicator()
-                : Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          // Валидация
-                          if (passwordController.text != confirmPasswordController.text) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Пароли не совпадают'),
-                                backgroundColor: Colors.orange,
-                              ),
-                            );
-                            return;
-                          }
-                          
-                          if (passwordController.text.length < 6) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Пароль должен быть минимум 6 символов'),
-                                backgroundColor: Colors.orange,
-                              ),
-                            );
-                            return;
-                          }
-
-                          // Попытка регистрации
-                          bool success = await authProvider.register(
-                            emailController.text,
-                            passwordController.text,
-                          );
-                          
-                          if (success) {
-                            // Если успешно - ничего не делаем, провайдер сам переключит на HomeScreen
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(double.infinity, 50),
-                          backgroundColor: Colors.green,
-                        ),
-                        child: Text(
-                          'Зарегистрироваться',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      TextButton(
-                        onPressed: () {
-                          authProvider.clearError();
-                          Navigator.pop(context); // Вернуться на вход
-                        },
-                        child: Text('Уже есть аккаунт? Войти'),
-                      ),
-                    ],
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );

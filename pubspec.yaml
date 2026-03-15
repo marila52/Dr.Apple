@@ -31,7 +31,10 @@ dependencies:
 
   flutter:
     sdk: flutter
-  
+
+
+  google_fonts: ^6.1.0 #шрифты
+
   # Firebase
   firebase_core: ^3.12.1
   firebase_auth: ^5.5.1
@@ -84,7 +87,14 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/images/dr_apple_logo.png
+    - assets/images/dr_apple_2_screen.png
+    - assets/images/dr_apple_reg.png
+    - assets/images/dr_apple_create_acc.png
+    - assets/images/Mr Noisy.png      # ← добавить
+    - assets/images/Mr Lazy.png 
+    - assets/images/Frame 2.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

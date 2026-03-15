@@ -3,9 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'screens/auth/login_screen.dart';
+import 'screens/welcome_screen.dart';  // ← Добавь импорт
 import 'screens/home/home_screen.dart';
-import 'providers/auth_provider.dart';  // Твой CustomAuthProvider здесь
+import 'providers/auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +26,39 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Dr. Apple',
-        theme: ThemeData.dark(),
-        home: AuthChecker(),  // ← AuthChecker внутри MultiProvider, всё ок!
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.transparent,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            foregroundColor: Colors.white,
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFFFF69B4),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: Colors.white.withOpacity(0.9),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide.none,
+            ),
+            labelStyle: TextStyle(color: Color(0xFFFF69B4)),
+          ),
+        ),
+        home: AuthChecker(),
       ),
     );
   }
@@ -36,22 +67,47 @@ class MyApp extends StatelessWidget {
 class AuthChecker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Теперь можно получить провайдер, если нужно
-    // final authProvider = Provider.of<CustomAuthProvider>(context, listen: false);
-    
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
-        }
-        if (snapshot.hasData) {
-          return HomeScreen();
-        }
-        return LoginScreen();
-      },
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFFFFF0F5),
+            Color(0xFFFFB6C1),
+            Color(0xFFFF69B4),
+          ],
+        ),
+      ),
+      child: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Загрузка...',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+          if (snapshot.hasData) {
+            return HomeScreen();  // Пользователь авторизован → сразу на главную
+          }
+          return WelcomeScreen();  // Не авторизован → на приветственный экран
+        },
+      ),
     );
   }
 }

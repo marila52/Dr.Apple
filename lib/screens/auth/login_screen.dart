@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
+import '../welcome_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,112 +20,142 @@ class _LoginScreenState extends State<LoginScreen> {
     final authProvider = Provider.of<CustomAuthProvider>(context);
 
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Dr. Apple',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Ваш дневник питания',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            SizedBox(height: 40),
-            
-            // Email поле
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xFF3D2B1F)),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => WelcomeScreen()),
+            );
+          },
+        ),
+        title: Text(
+          'Вход',
+          style: GoogleFonts.robotoMono(color: Color(0xFF3D2B1F)),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(24.0),
+          child: Column(
+            children: [
+              // Картинка (побольше)
+              Image.asset(
+                'assets/images/dr_apple_create_acc.png',
+                width: 240,
+                height: 240,
+                fit: BoxFit.contain,
               ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            SizedBox(height: 16),
-            
-            // Пароль поле
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
-                labelText: 'Пароль',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscurePassword ? Icons.visibility : Icons.visibility_off,
+              SizedBox(height: 30),
+              // Email поле
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  prefixIcon: Icon(Icons.email, color: Color(0xFF3D2B1F)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
+                keyboardType: TextInputType.emailAddress,
               ),
-              obscureText: _obscurePassword,
-            ),
-            SizedBox(height: 24),
-
-            // Сообщение об ошибке
-            if (authProvider.errorMessage != null)
-              Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.red.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.red.shade200),
+              SizedBox(height: 16),
+              // Пароль
+              TextField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Пароль',
+                  prefixIcon: Icon(Icons.lock, color: Color(0xFF3D2B1F)),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      color: Color(0xFF3D2B1F),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
-                child: Row(
-                  children: [
-                    Icon(Icons.error, color: Colors.red),
-                    SizedBox(width: 8),
-                    Expanded(
+                obscureText: _obscurePassword,
+              ),
+              SizedBox(height: 24),
+              // Ошибка
+              if (authProvider.errorMessage != null)
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.red.shade50,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Text(
+                    authProvider.errorMessage!,
+                    style: TextStyle(color: Colors.red.shade900),
+                  ),
+                ),
+              SizedBox(height: 16),
+              // Кнопка входа (тёмная)
+              authProvider.isLoading
+                  ? CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3D2B1F)),
+                    )
+                  : ElevatedButton(
+                      onPressed: () async {
+                        bool success = await authProvider.signIn(
+                          emailController.text.trim(),
+                          passwordController.text.trim(),
+                        );
+                        if (!success) {}
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 55),
+                        backgroundColor: Color(0xFF3D2B1F),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                       child: Text(
-                        authProvider.errorMessage!,
-                        style: TextStyle(color: Colors.red.shade900),
+                        'Войти',
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ],
+              SizedBox(height: 16),
+              TextButton(
+                onPressed: () {
+                  authProvider.clearError();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterScreen()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  foregroundColor: Color(0xFF3D2B1F),
+                ),
+                child: Text(
+                  'Нет аккаунта? Зарегистрироваться',
+                  style: GoogleFonts.robotoMono(fontSize: 16),
                 ),
               ),
-            SizedBox(height: 16),
-
-            // Кнопка входа
-            authProvider.isLoading
-                ? CircularProgressIndicator()
-                : Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          bool success = await authProvider.signIn(
-                            emailController.text,
-                            passwordController.text,
-                          );
-                          if (!success) {
-                            // Ошибка уже в authProvider.errorMessage
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(double.infinity, 50),
-                        ),
-                        child: Text('Войти'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          authProvider.clearError();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => RegisterScreen()),
-                          );
-                        },
-                        child: Text('Нет аккаунта? Зарегистрироваться'),
-                      ),
-                    ],
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );
