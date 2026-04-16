@@ -7,10 +7,10 @@ class AuthChoiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFFDF8), // ← новый фон
       body: Stack(
         children: [
-          // Картинка внизу (широкая, прижата к низу)
+          // Картинка внизу
           Align(
             alignment: Alignment.bottomCenter,
             child: Image.asset(
@@ -19,28 +19,26 @@ class AuthChoiceScreen extends StatelessWidget {
               fit: BoxFit.fitWidth,
             ),
           ),
-
-          // Основной контент
+          // Контент
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.all(24.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Frame 2.png (прямоугольная картинка)
+                  // Центральная картинка
                   Container(
                     width: double.infinity,
-                    height: 200, // можешь изменить на 150, 180, 220 и т.д.
+                    height: 200,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
                         image: AssetImage('assets/images/Frame 2.png'),
-                        fit: BoxFit.cover, // заполнит контейнер
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  
-                  SizedBox(height: 30), // отступ перед кнопками
+                  SizedBox(height: 30),
                   
                   // Кнопка "Создать аккаунт"
                   ElevatedButton(
@@ -51,13 +49,12 @@ class AuthChoiceScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 60),
-                      backgroundColor: Color(0xFF3D2B1F),
+                      minimumSize: Size(double.infinity, 55),
+                      backgroundColor: Color(0xFF5C5248), // ← новый цвет кнопки
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      elevation: 4,
                     ),
                     child: Text(
                       'Создать аккаунт',
@@ -67,7 +64,6 @@ class AuthChoiceScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
                   SizedBox(height: 16),
                   
                   // Кнопка "Войти"
@@ -79,9 +75,9 @@ class AuthChoiceScreen extends StatelessWidget {
                       );
                     },
                     style: OutlinedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 60),
-                      foregroundColor: Color(0xFF3D2B1F),
-                      side: BorderSide(color: Color(0xFF3D2B1F), width: 2),
+                      minimumSize: Size(double.infinity, 55),
+                      foregroundColor: Color(0xFF5C5248),
+                      side: BorderSide(color: Color(0xFF5C5248), width: 2),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -94,7 +90,6 @@ class AuthChoiceScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
                   SizedBox(height: 40),
                   
                   // Текст под кнопками
@@ -116,7 +111,7 @@ class AuthChoiceScreen extends StatelessWidget {
                       style: GoogleFonts.robotoMono(
                         fontSize: 15,
                         height: 1.4,
-                        color: Color(0xFF3D2B1F),
+                        color: Color(0xFF5C5248), // ← новый цвет текста
                       ),
                       textAlign: TextAlign.center,
                     ),

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
 import '../welcome_screen.dart';
 import 'login_screen.dart';
+import 'package:dr_apple/screens/gender_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -22,10 +23,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final authProvider = Provider.of<CustomAuthProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFFDF8), // ← новый фон
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF3D2B1F)),
+          icon: Icon(Icons.arrow_back, color: Color(0xFF5C5248)),
           onPressed: () {
             Navigator.pushReplacement(
               context,
@@ -35,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         title: Text(
           'Регистрация',
-          style: GoogleFonts.robotoMono(color: Color(0xFF3D2B1F)),
+          style: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -45,7 +46,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: EdgeInsets.all(24.0),
           child: Column(
             children: [
-              // Картинка
               Image.asset(
                 'assets/images/dr_apple_reg.png',
                 width: 200,
@@ -53,32 +53,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 fit: BoxFit.contain,
               ),
               SizedBox(height: 20),
-              // Email поле
+              
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  prefixIcon: Icon(Icons.email, color: Color(0xFF3D2B1F)),
+                  labelStyle: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
+                  prefixIcon: Icon(Icons.email, color: Color(0xFF5C5248)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
                 keyboardType: TextInputType.emailAddress,
+                style: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
               ),
               SizedBox(height: 16),
-              // Пароль
+              
               TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Пароль',
-                  prefixIcon: Icon(Icons.lock, color: Color(0xFF3D2B1F)),
+                  labelStyle: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
+                  prefixIcon: Icon(Icons.lock, color: Color(0xFF5C5248)),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                      color: Color(0xFF3D2B1F),
+                      color: Color(0xFF5C5248),
                     ),
                     onPressed: () {
                       setState(() {
@@ -91,21 +93,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
                 obscureText: _obscurePassword,
+                style: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
               ),
               SizedBox(height: 16),
-              // Подтверждение пароля
+              
               TextField(
                 controller: confirmPasswordController,
                 decoration: InputDecoration(
                   labelText: 'Подтвердите пароль',
-                  prefixIcon: Icon(Icons.lock_outline, color: Color(0xFF3D2B1F)),
+                  labelStyle: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
+                  prefixIcon: Icon(Icons.lock_outline, color: Color(0xFF5C5248)),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
-                      color: Color(0xFF3D2B1F),
+                      color: Color(0xFF5C5248),
                     ),
                     onPressed: () {
                       setState(() {
@@ -118,12 +121,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
                 obscureText: _obscureConfirmPassword,
+                style: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
               ),
               SizedBox(height: 24),
-              // Ошибка
+              
               if (authProvider.errorMessage != null)
                 Container(
                   padding: EdgeInsets.all(12),
@@ -133,14 +136,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   child: Text(
                     authProvider.errorMessage!,
-                    style: TextStyle(color: Colors.red.shade900),
+                    style: GoogleFonts.robotoMono(color: Colors.red.shade900),
                   ),
                 ),
               SizedBox(height: 16),
-              // Кнопка регистрации (тёмная)
+              
               authProvider.isLoading
                   ? CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3D2B1F)),
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5C5248)),
                     )
                   : ElevatedButton(
                       onPressed: () async {
@@ -166,11 +169,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           emailController.text.trim(),
                           passwordController.text.trim(),
                         );
-                        if (!success) {}
+                        if (success) {
+                          // Регистрация прошла – переходим на экран пола
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const GenderScreen()),
+                            );
+                          }
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, 55),
-                        backgroundColor: Color(0xFF3D2B1F),
+                        backgroundColor: Color(0xFF5C5248),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -185,6 +194,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
               SizedBox(height: 16),
+              
               TextButton(
                 onPressed: () {
                   authProvider.clearError();
@@ -194,7 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   );
                 },
                 style: TextButton.styleFrom(
-                  foregroundColor: Color(0xFF3D2B1F),
+                  foregroundColor: Color(0xFF5C5248),
                 ),
                 child: Text(
                   'Уже есть аккаунт? Войти',

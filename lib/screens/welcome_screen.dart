@@ -17,20 +17,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2), // длительность исчезновения
+      duration: Duration(seconds: 2),
     );
-    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
 
-    // Запускаем исчезновение через 5 секунд
     Future.delayed(Duration(seconds: 5), () {
       if (mounted) {
         _controller.forward();
       }
     });
 
-    // Переход на следующий экран через 7 секунд (5 + 2)
     Future.delayed(Duration(seconds: 7), () {
       if (mounted) {
         Navigator.pushReplacement(
@@ -50,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // фон всегда белый
+      backgroundColor: Color.fromARGB(255, 255, 255, 255), // ← новый фон
       body: SafeArea(
         child: Center(
           child: FadeTransition(
@@ -58,10 +54,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Логотип PNG (больше)
                 Container(
-                  width: 260,
-                  height: 260,
+                  width: 220,
+                  height: 220,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -71,22 +66,20 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   ),
                 ),
                 SizedBox(height: 40),
-                // Название
                 Text(
                   'Dr. Apple',
                   style: GoogleFonts.indieFlower(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF3D2B1F), // новый цвет
+                    color: Color(0xFF5C5248), // ← новый цвет текста
                   ),
                 ),
                 SizedBox(height: 16),
-                // Подзаголовок (теперь тоже этим цветом)
                 Text(
                   'Твой идеальный дневник питания',
                   style: GoogleFonts.badScript(
                     fontSize: 20,
-                    color: Color(0xFF3D2B1F),
+                    color: Color(0xFF5C5248), // ← новый цвет текста
                   ),
                   textAlign: TextAlign.center,
                 ),

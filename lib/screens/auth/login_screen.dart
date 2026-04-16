@@ -20,10 +20,10 @@ class _LoginScreenState extends State<LoginScreen> {
     final authProvider = Provider.of<CustomAuthProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFFDF8), // ← новый фон
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF3D2B1F)),
+          icon: Icon(Icons.arrow_back, color: Color(0xFF5C5248)),
           onPressed: () {
             Navigator.pushReplacement(
               context,
@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         title: Text(
           'Вход',
-          style: GoogleFonts.robotoMono(color: Color(0xFF3D2B1F)),
+          style: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -43,7 +43,6 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.all(24.0),
           child: Column(
             children: [
-              // Картинка (побольше)
               Image.asset(
                 'assets/images/dr_apple_create_acc.png',
                 width: 240,
@@ -51,32 +50,34 @@ class _LoginScreenState extends State<LoginScreen> {
                 fit: BoxFit.contain,
               ),
               SizedBox(height: 30),
-              // Email поле
+              
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  prefixIcon: Icon(Icons.email, color: Color(0xFF3D2B1F)),
+                  labelStyle: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
+                  prefixIcon: Icon(Icons.email, color: Color(0xFF5C5248)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
                 keyboardType: TextInputType.emailAddress,
+                style: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
               ),
               SizedBox(height: 16),
-              // Пароль
+              
               TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Пароль',
-                  prefixIcon: Icon(Icons.lock, color: Color(0xFF3D2B1F)),
+                  labelStyle: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
+                  prefixIcon: Icon(Icons.lock, color: Color(0xFF5C5248)),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                      color: Color(0xFF3D2B1F),
+                      color: Color(0xFF5C5248),
                     ),
                     onPressed: () {
                       setState(() {
@@ -89,12 +90,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: TextStyle(color: Color(0xFF3D2B1F)),
                 ),
                 obscureText: _obscurePassword,
+                style: GoogleFonts.robotoMono(color: Color(0xFF5C5248)),
               ),
               SizedBox(height: 24),
-              // Ошибка
+              
               if (authProvider.errorMessage != null)
                 Container(
                   padding: EdgeInsets.all(12),
@@ -104,14 +105,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: Text(
                     authProvider.errorMessage!,
-                    style: TextStyle(color: Colors.red.shade900),
+                    style: GoogleFonts.robotoMono(color: Colors.red.shade900),
                   ),
                 ),
               SizedBox(height: 16),
-              // Кнопка входа (тёмная)
+              
               authProvider.isLoading
                   ? CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3D2B1F)),
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5C5248)),
                     )
                   : ElevatedButton(
                       onPressed: () async {
@@ -119,11 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           emailController.text.trim(),
                           passwordController.text.trim(),
                         );
-                        if (!success) {}
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, 55),
-                        backgroundColor: Color(0xFF3D2B1F),
+                        backgroundColor: Color(0xFF5C5248),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -138,6 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
               SizedBox(height: 16),
+              
               TextButton(
                 onPressed: () {
                   authProvider.clearError();
@@ -147,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 },
                 style: TextButton.styleFrom(
-                  foregroundColor: Color(0xFF3D2B1F),
+                  foregroundColor: Color(0xFF5C5248),
                 ),
                 child: Text(
                   'Нет аккаунта? Зарегистрироваться',
