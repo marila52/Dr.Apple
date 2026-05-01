@@ -3,10 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'screens/welcome_screen.dart';
+import 'screens/onboarding/welcome_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'providers/auth_provider.dart';
-
+//import 'screens/home/diary_screen.dart'; 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   

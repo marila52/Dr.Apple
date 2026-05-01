@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../providers/auth_provider.dart';
-import '../welcome_screen.dart';
+import '../onboarding/welcome_screen.dart';
 import 'login_screen.dart';
-import 'package:dr_apple/screens/gender_screen.dart';
+import 'package:dr_apple/screens/onboarding/gender_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final authProvider = Provider.of<CustomAuthProvider>(context);
 
     return Scaffold(
-      backgroundColor: Color(0xFFFDF8), // ← новый фон
+      backgroundColor: Color(0xFFFDF8FF), // ← новый фон
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Color(0xFF5C5248)),

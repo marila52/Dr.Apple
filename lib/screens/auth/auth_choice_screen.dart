@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'auth/login_screen.dart';
-import 'auth/register_screen.dart';
+import 'login_screen.dart';
+import 'register_screen.dart';
 
 class AuthChoiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFDF8), // ← новый фон
+      backgroundColor: Color(0xFFFDF8FF), // ← новый фон
       body: Stack(
         children: [
           // Картинка внизу
@@ -107,7 +107,7 @@ class AuthChoiceScreen extends StatelessWidget {
                       ],
                     ),
                     child: Text(
-                      'Никаких навороченных тренеров, социальных сетей и рекламы. Только ты, твоя тарелка и честная математика здоровья.',
+                      'Никаких навороченных тренеров, социальных сетей и рекламы. Только ты, твоя тарелка и честная математика здоровья!',
                       style: GoogleFonts.robotoMono(
                         fontSize: 15,
                         height: 1.4,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'auth_choice_screen.dart';
+import '../auth/auth_choice_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
