@@ -151,7 +151,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
       appBar: AppBar(
         title: Text(
           'Дневник питания',
-          style: GoogleFonts.robotoMono(
+          style: GoogleFonts.roboto(
             color: const Color(0xFF5C5248),
             fontSize: 16,
           ),
@@ -225,7 +225,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
               children: [
                 Text(
                   _getMonthName(_selectedDate.month),
-                  style: GoogleFonts.robotoMono(
+                  style: GoogleFonts.roboto(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: const Color(0xFF5C5248),
@@ -233,7 +233,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 ),
                 Text(
                   '${_selectedDate.year}',
-                  style: GoogleFonts.robotoMono(
+                  style: GoogleFonts.roboto(
                     fontSize: 14,
                     color: Colors.grey.shade600,
                   ),
@@ -250,7 +250,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
               children: ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'].map((day) {
                 return Text(
                   day,
-                  style: GoogleFonts.robotoMono(
+                  style: GoogleFonts.roboto(
                     fontSize: 12,
                     color: Colors.grey.shade500,
                   ),
@@ -281,7 +281,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                     child: Text(
                       day.toString(),
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.robotoMono(
+                      style: GoogleFonts.roboto(
                         color: isSelected ? Colors.white : const Color(0xFF5C5248),
                         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                       ),
@@ -312,7 +312,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             children: [
               Text(
                 '${_dailySummary['calories']!.toInt()} ккал съедено',
-                style: GoogleFonts.robotoMono(
+                style: GoogleFonts.roboto(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -320,7 +320,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
               ),
               Text(
                 '${_dailyTargets['calories']!.toInt()}',
-                style: GoogleFonts.robotoMono(
+                style: GoogleFonts.roboto(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white70,
@@ -362,7 +362,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         children: [
           Text(
             title,
-            style: GoogleFonts.robotoMono(
+            style: GoogleFonts.roboto(
               fontSize: 12,
               color: Colors.white70,
             ),
@@ -382,7 +382,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
               const SizedBox(width: 8),
               Text(
                 '${current.toInt()}/${target.toInt()} г',
-                style: GoogleFonts.robotoMono(
+                style: GoogleFonts.roboto(
                   fontSize: 11,
                   color: Colors.white,
                 ),
@@ -439,7 +439,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 const SizedBox(width: 8),
                 Text(
                   title,
-                  style: GoogleFonts.robotoMono(
+                  style: GoogleFonts.roboto(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: const Color(0xFF5C5248),
@@ -449,7 +449,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 if (meals.isNotEmpty)
                   Text(
                     '${meals.fold(0.0, (sum, m) => sum + m.calories).toInt()} ккал',
-                    style: GoogleFonts.robotoMono(
+                    style: GoogleFonts.roboto(
                       fontSize: 12,
                       color: Colors.grey.shade600,
                     ),
@@ -479,11 +479,11 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 return ListTile(
                   title: Text(
                     meal.productName,
-                    style: GoogleFonts.robotoMono(fontSize: 14),
+                    style: GoogleFonts.roboto(fontSize: 14),
                   ),
                   trailing: Text(
                     '${meal.calories.toInt()} ккал',
-                    style: GoogleFonts.robotoMono(
+                    style: GoogleFonts.roboto(
                       fontSize: 14,
                       color: const Color(0xFF5C5248),
                     ),
@@ -520,7 +520,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             children: [
               Text(
                 'Водный баланс:',
-                style: GoogleFonts.robotoMono(
+                style: GoogleFonts.roboto(
                   fontSize: 14,
                   color: const Color(0xFF5C5248),
                 ),
@@ -535,7 +535,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   ),
                   Text(
                     '$_waterIntake/$_waterTarget мл',
-                    style: GoogleFonts.robotoMono(
+                    style: GoogleFonts.roboto(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: const Color(0xFF5C5248),
@@ -607,7 +607,7 @@ class _AddEntryBottomSheet extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Text(
               'Добавить продукт',
-              style: GoogleFonts.robotoMono(
+              style: GoogleFonts.roboto(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: const Color(0xFF5C5248),
@@ -619,7 +619,7 @@ class _AddEntryBottomSheet extends StatelessWidget {
               child: Text(
                 'Здесь будет поиск продуктов\n(скоро будет реализовано)',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.robotoMono(color: Colors.grey),
+                style: GoogleFonts.roboto(color: Colors.grey),
               ),
             ),
           ),
@@ -653,7 +653,7 @@ class _EntryDetailsBottomSheet extends StatelessWidget {
         children: [
           Text(
             entry.productName,
-            style: GoogleFonts.robotoMono(
+            style: GoogleFonts.roboto(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: const Color(0xFF5C5248),
@@ -708,11 +708,11 @@ class _EntryDetailsBottomSheet extends StatelessWidget {
         children: [
           Text(
             label,
-            style: GoogleFonts.robotoMono(color: Colors.grey.shade600),
+            style: GoogleFonts.roboto(color: Colors.grey.shade600),
           ),
           Text(
             value,
-            style: GoogleFonts.robotoMono(
+            style: GoogleFonts.roboto(
               fontWeight: FontWeight.bold,
               color: const Color(0xFF5C5248),
             ),

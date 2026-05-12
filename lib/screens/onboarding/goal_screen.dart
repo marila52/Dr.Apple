@@ -45,7 +45,7 @@ class _GoalScreenState extends State<GoalScreen> {
         ),
         title: Text(
           'Цель',
-          style: GoogleFonts.robotoMono(color: const Color(0xFF5C5248)),
+          style: GoogleFonts.roboto(color: const Color(0xFF5C5248)),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -59,7 +59,7 @@ class _GoalScreenState extends State<GoalScreen> {
             
             Text(
               'Ваша цель',
-              style: GoogleFonts.robotoMono(
+              style: GoogleFonts.literata(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
                 color: const Color(0xFF5C5248),
@@ -104,7 +104,7 @@ class _GoalScreenState extends State<GoalScreen> {
                               children: [
                                 Text(
                                   goal['title'],
-                                  style: GoogleFonts.robotoMono(
+                                  style: GoogleFonts.literata(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: isSelected 
@@ -115,7 +115,7 @@ class _GoalScreenState extends State<GoalScreen> {
                                 const SizedBox(height: 8),
                                 Text(
                                   goal['subtitle'],
-                                  style: GoogleFonts.robotoMono(
+                                  style: GoogleFonts.roboto(
                                     fontSize: 14,
                                     color: Colors.grey.shade500,
                                   ),
@@ -183,9 +183,9 @@ class _GoalScreenState extends State<GoalScreen> {
                   ),
                 ),
                 child: Text(
-                  'Завершить',
-                  style: GoogleFonts.robotoMono(
-                    fontSize: 18,
+                  'ЗАВЕРШИТЬ',
+                  style: GoogleFonts.roboto(
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

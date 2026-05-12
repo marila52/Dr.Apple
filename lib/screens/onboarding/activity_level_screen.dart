@@ -46,7 +46,7 @@ class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
         ),
         title: Text(
           'Активность',
-          style: GoogleFonts.robotoMono(color: const Color(0xFF5C5248)),
+          style: GoogleFonts.roboto(color: const Color(0xFF5C5248)),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -60,7 +60,7 @@ class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
             
             Text(
               'Ваш уровень активности',
-              style: GoogleFonts.robotoMono(
+              style: GoogleFonts.literata(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
                 color: const Color(0xFF5C5248),
@@ -105,7 +105,7 @@ class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
                               children: [
                                 Text(
                                   level['title'],
-                                  style: GoogleFonts.robotoMono(
+                                  style: GoogleFonts.literata(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     color: isSelected 
@@ -116,7 +116,7 @@ class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
                                 const SizedBox(height: 8),
                                 Text(
                                   level['subtitle'],
-                                  style: GoogleFonts.robotoMono(
+                                  style: GoogleFonts.roboto(
                                     fontSize: 14,
                                     color: Colors.grey.shade500,
                                   ),
@@ -160,9 +160,9 @@ class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
                   ),
                 ),
                 child: Text(
-                  'Далее',
-                  style: GoogleFonts.robotoMono(
-                    fontSize: 18,
+                  'ДАЛЕЕ',
+                  style: GoogleFonts.roboto(
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

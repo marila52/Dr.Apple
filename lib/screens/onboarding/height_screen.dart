@@ -13,8 +13,8 @@ class HeightScreen extends StatefulWidget {
 class _HeightScreenState extends State<HeightScreen> {
   double _height = 170.0;
 
-  final double _minHeight = 150.0;
-  final double _maxHeight = 230.0;
+  final double _minHeight = 100.0;
+  final double _maxHeight = 250.0;
 
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
@@ -127,7 +127,7 @@ class _HeightScreenState extends State<HeightScreen> {
 
                     Text(
                       'Введите ваш рост',
-                      style: GoogleFonts.robotoMono(
+                      style: GoogleFonts.literata(
                         fontSize: 26,
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFF5C5248),
@@ -155,7 +155,7 @@ class _HeightScreenState extends State<HeightScreen> {
                               focusNode: _focusNode,
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.center,
-                              style: GoogleFonts.robotoMono(
+                              style: GoogleFonts.literata(
                                 fontSize: 56,
                                 fontWeight: FontWeight.bold,
                                 color: const Color(0xFF5C5248),
@@ -176,7 +176,7 @@ class _HeightScreenState extends State<HeightScreen> {
 
                           Text(
                             'см',
-                            style: GoogleFonts.robotoMono(
+                            style: GoogleFonts.literata(
                               fontSize: 24,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF5C5248),
@@ -197,11 +197,11 @@ class _HeightScreenState extends State<HeightScreen> {
                             children: [
                               Text(
                                 '${_minHeight.toInt()} см',
-                                style: GoogleFonts.robotoMono(fontSize: 14),
+                                style: GoogleFonts.roboto(fontSize: 14),
                               ),
                               Text(
                                 '${_maxHeight.toInt()} см',
-                                style: GoogleFonts.robotoMono(fontSize: 14),
+                                style: GoogleFonts.roboto(fontSize: 14),
                               ),
                             ],
                           ),
@@ -256,7 +256,7 @@ class _HeightScreenState extends State<HeightScreen> {
                             ),
                             child: Text(
                               'ГОТОВО',
-                              style: GoogleFonts.robotoMono(
+                              style: GoogleFonts.roboto(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w500,
                               ),

@@ -39,7 +39,7 @@ class GenderScreen extends StatelessWidget {
               // Заголовок
               Text(
                 'Выберите пол',
-                style: GoogleFonts.robotoMono(
+                style: GoogleFonts.literata(
                   fontSize: 26,
                   fontWeight: FontWeight.w500,
                   color: const Color(0xFF5C5248),
@@ -125,14 +125,14 @@ class _GenderOption extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: buttonColor,
             foregroundColor: Colors.white,
-            fixedSize: const Size(131, 38),
+            fixedSize: const Size(160, 45),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
           ),
           child: Text(
             buttonText,
-            style: GoogleFonts.robotoMono(
+            style: GoogleFonts.literata(
               fontSize: 21,
               fontWeight: FontWeight.w500,
             ),

@@ -16,8 +16,8 @@ class _WeightScreenState extends State<WeightScreen> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
-  static const double minWeight = 30.0;
-  static const double maxWeight = 170.0;
+  static const double minWeight = 20.0;
+  static const double maxWeight = 500.0;
 
   @override
   void initState() {
@@ -129,7 +129,7 @@ class _WeightScreenState extends State<WeightScreen> {
                     Text(
                       'Введите ваш вес',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.robotoMono(
+                      style: GoogleFonts.literata(
                         fontSize: 26,
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFF5C5248),
@@ -140,7 +140,7 @@ class _WeightScreenState extends State<WeightScreen> {
 
                     Text(
                       'от ${minWeight.toStringAsFixed(1)} до ${maxWeight.toStringAsFixed(1)} кг',
-                      style: GoogleFonts.robotoMono(
+                      style: GoogleFonts.literata(
                         fontSize: 14,
                         color: const Color(0xFF999999),
                       ),
@@ -177,7 +177,7 @@ class _WeightScreenState extends State<WeightScreen> {
                                   decimal: true,
                                 ),
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.robotoMono(
+                                style: GoogleFonts.literata(
                                   fontSize: 56,
                                   fontWeight: FontWeight.bold,
                                   color: const Color(0xFF5C5248),
@@ -198,7 +198,7 @@ class _WeightScreenState extends State<WeightScreen> {
                             const SizedBox(width: 8),
                             Text(
                               'кг',
-                              style: GoogleFonts.robotoMono(
+                              style: GoogleFonts.literata(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
                                 color: const Color(0xFF5C5248),
@@ -254,7 +254,7 @@ class _WeightScreenState extends State<WeightScreen> {
                             ),
                             child: Text(
                               'ГОТОВО',
-                              style: GoogleFonts.robotoMono(
+                              style: GoogleFonts.roboto(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w500,
                               ),

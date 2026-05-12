@@ -13,8 +13,8 @@ class AgeScreen extends StatefulWidget {
 class _AgeScreenState extends State<AgeScreen> {
   double _age = 25.0;
 
-  static const double minAge = 18.0;
-  static const double maxAge = 100.0;
+  static const double minAge = 10.0;
+  static const double maxAge = 120.0;
 
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
@@ -126,7 +126,7 @@ class _AgeScreenState extends State<AgeScreen> {
 
                     Text(
                       'Введите ваш возраст',
-                      style: GoogleFonts.robotoMono(
+                      style: GoogleFonts.literata(
                         fontSize: 26,
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFF5C5248),
@@ -156,7 +156,7 @@ class _AgeScreenState extends State<AgeScreen> {
                               focusNode: _focusNode,
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.center,
-                              style: GoogleFonts.robotoMono(
+                              style: GoogleFonts.literata(
                                 fontSize: 56,
                                 fontWeight: FontWeight.bold,
                                 color: const Color(0xFF5C5248),
@@ -177,7 +177,7 @@ class _AgeScreenState extends State<AgeScreen> {
 
                           Text(
                             'лет',
-                            style: GoogleFonts.robotoMono(
+                            style: GoogleFonts.literata(
                               fontSize: 24,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF5C5248),
@@ -198,11 +198,11 @@ class _AgeScreenState extends State<AgeScreen> {
                             children: [
                               Text(
                                 '${minAge.toInt()} лет',
-                                style: GoogleFonts.robotoMono(fontSize: 14),
+                                style: GoogleFonts.roboto(fontSize: 14),
                               ),
                               Text(
                                 '${maxAge.toInt()} лет',
-                                style: GoogleFonts.robotoMono(fontSize: 14),
+                                style: GoogleFonts.roboto(fontSize: 14),
                               ),
                             ],
                           ),
@@ -256,7 +256,7 @@ class _AgeScreenState extends State<AgeScreen> {
                             ),
                             child: Text(
                               'ГОТОВО',
-                              style: GoogleFonts.robotoMono(
+                              style: GoogleFonts.roboto(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w500,
                               ),
