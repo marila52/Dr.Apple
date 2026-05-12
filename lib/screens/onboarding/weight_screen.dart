@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../../providers/user_data_provider.dart';
 import 'height_screen.dart';
 
 class WeightScreen extends StatefulWidget {
@@ -236,6 +238,7 @@ class _WeightScreenState extends State<WeightScreen> {
                           child: ElevatedButton(
                             onPressed: () {
                               _applyFinalValidation();
+                              context.read<UserDataProvider>().setWeight(_weight);
 
                               Navigator.push(
                                 context,

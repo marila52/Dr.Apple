@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../../providers/user_data_provider.dart';
+import '../../utils/kcal_calculator.dart';
 import 'weight_screen.dart';  // 👈 ДОБАВЛЕН импорт для перехода
 import '../auth/register_screen.dart';
 class GenderScreen extends StatelessWidget {
@@ -56,7 +59,7 @@ class GenderScreen extends StatelessWidget {
                     buttonText: 'Женский',
                     buttonColor: const Color(0xFFF0B1C4),
                     onPressed: () {
-                      // 👇 ИЗМЕНЕНО: переходим на экран веса
+                      context.read<UserDataProvider>().setGender(Gender.female);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const WeightScreen()),
@@ -69,7 +72,7 @@ class GenderScreen extends StatelessWidget {
                     buttonText: 'Мужской',
                     buttonColor: const Color(0xFF9991DA),
                     onPressed: () {
-                      // 👇 ИЗМЕНЕНО: переходим на экран веса
+                      context.read<UserDataProvider>().setGender(Gender.male);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const WeightScreen()),

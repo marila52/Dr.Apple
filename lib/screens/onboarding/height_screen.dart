@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../../providers/user_data_provider.dart';
 import 'age_screen.dart';
 
 class HeightScreen extends StatefulWidget {
@@ -238,6 +240,7 @@ class _HeightScreenState extends State<HeightScreen> {
 
                               if (_height >= _minHeight &&
                                   _height <= _maxHeight) {
+                                context.read<UserDataProvider>().setHeight(_height);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

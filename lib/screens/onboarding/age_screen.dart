@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../../providers/user_data_provider.dart';
 import 'activity_level_screen.dart';
 
 class AgeScreen extends StatefulWidget {
@@ -237,6 +239,7 @@ class _AgeScreenState extends State<AgeScreen> {
                               _applyFinalValidation();
 
                               if (_age >= minAge && _age <= maxAge) {
+                                context.read<UserDataProvider>().setAge(_age.round());
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

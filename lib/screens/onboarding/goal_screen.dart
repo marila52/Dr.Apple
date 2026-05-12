@@ -145,32 +145,24 @@ class _GoalScreenState extends State<GoalScreen> {
               child: ElevatedButton(
                 onPressed: _selectedGoal != -1
                     ? () async {
-                        // Получаем данные из предыдущих экранов
-                        // Временно используем заглушки, потом нужно передать реальные данные
-                        final userProvider = Provider.of<UserDataProvider>(context, listen: false);
-                        
-                        // TODO: получить реальные значения из предыдущих экранов
-                        // Для примера:
-                        final gender = Gender.female; // взять из GenderScreen
-                        final weight = 65.0; // взять из WeightScreen
-                        final height = 165.0; // взять из HeightScreen
-                        final age = 25; // взять из AgeScreen
-                        final activityLevel = ActivityLevel.moderate; // взять из ActivityLevelScreen
-                        final goal = _goals[_selectedGoal]['goal'];
-                        
-                        final success = await userProvider.savePersonalData(
-                          gender: gender,
-                          weight: weight,
-                          height: height,
-                          age: age,
-                          activityLevel: activityLevel,
-                          goal: goal,
-                        );
-                        
-                        if (success && mounted) {
+                        final userProvider = context.read<UserDataProvider>();
+                        final goal = _goals[_selectedGoal]['goal'] as Goal;
+
+                        final success = await userProvider.savePersonalData(goal: goal);
+
+                        if (!mounted) return;
+
+                        if (success) {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => HomeScreen()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(userProvider.error ?? 'Не удалось сохранить данные'),
+                              backgroundColor: Colors.red,
+                            ),
                           );
                         }
                       }

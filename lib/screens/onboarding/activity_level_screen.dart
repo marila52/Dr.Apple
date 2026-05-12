@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../../providers/user_data_provider.dart';
+import '../../utils/kcal_calculator.dart';
 import 'goal_screen.dart';
 
 class ActivityLevelScreen extends StatefulWidget {
@@ -16,22 +19,27 @@ class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
     {
       'title': 'Изначальный',
       'subtitle': 'почти нет физической нагрузки, сидящий образ жизни',
+      'level': ActivityLevel.sedentary,
     },
     {
       'title': 'Легкий',
       'subtitle': '1-2 тренировки в неделю, легкие прогулки',
+      'level': ActivityLevel.light,
     },
     {
       'title': 'Средний',
       'subtitle': '3-4 тренировки в неделю, умеренная активность в течение дня',
+      'level': ActivityLevel.moderate,
     },
     {
       'title': 'Высокий',
       'subtitle': '5-6 тренировок в неделю, активный образ жизни',
+      'level': ActivityLevel.active,
     },
     {
       'title': 'Очень высокий',
       'subtitle': 'ежедневные тренировки, профессиональный спорт',
+      'level': ActivityLevel.veryActive,
     },
   ];
 
@@ -146,6 +154,9 @@ class _ActivityLevelScreenState extends State<ActivityLevelScreen> {
               child: ElevatedButton(
                 onPressed: _selectedLevel != -1
                     ? () {
+                        final selectedActivityLevel = _levels[_selectedLevel]['level'] as ActivityLevel;
+                        context.read<UserDataProvider>().setActivityLevel(selectedActivityLevel);
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const GoalScreen()),
