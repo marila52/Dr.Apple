@@ -66,9 +66,23 @@ class AuthChecker extends StatelessWidget {
           );
         }
 
+        // if (snapshot.hasData) {
+        //   return const HomeScreen();
+        // }
+
         if (snapshot.hasData) {
-          return const HomeScreen();
-        }
+          return Consumer<UserDataProvider>(
+            builder: (context, userProvider, _) {
+              final user = userProvider.currentUser;
+
+              if (user == null || user.dailyCalories == null) {
+                return WelcomeScreen();
+              }
+
+              return const HomeScreen();
+        },
+      );
+    }
 
         return WelcomeScreen();
       },

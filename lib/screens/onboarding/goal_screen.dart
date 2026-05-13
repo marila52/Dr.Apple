@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../providers/user_data_provider.dart';
 import '../../utils/kcal_calculator.dart';
-import '../../screens/home/home_screen.dart';
+import '../../screens/onboarding/calorie_loading_screen.dart';
+//import '../../screens/home/home_screen.dart';
+//import '../../screens/onboarding/calorie_result_screen.dart';
 //import '../../screens/home/diary_screen.dart'; // если файл так называется
 
 class GoalScreen extends StatefulWidget {
@@ -155,7 +157,7 @@ class _GoalScreenState extends State<GoalScreen> {
                         if (success) {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => HomeScreen()),
+                            MaterialPageRoute(builder: (context) => CalorieLoadingScreen()),
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
