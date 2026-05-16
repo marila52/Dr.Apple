@@ -1,4 +1,3 @@
-
 // screens/home/diary_screen.dart
 
 import 'package:flutter/material.dart';
@@ -23,6 +22,10 @@ class DiaryScreen extends StatefulWidget {
 class _DiaryScreenState extends State<DiaryScreen> {
   final DiaryDao _diaryDao = DiaryDao();
   final FirestoreService _firestoreService = FirestoreService();
+  late final ScrollController _dateScrollController;
+
+  static const int _initialDateIndex = 100000;
+  static const double _dateItemExtent = 64;
 
   DateTime _selectedDate = DateTime.now();
   List<DiaryEntry> _entries = [];
@@ -62,13 +65,26 @@ class _DiaryScreenState extends State<DiaryScreen> {
   void initState() {
     super.initState();
 
+    _selectedDate = DateTime.now();
+
+    _dateScrollController = ScrollController(
+    initialScrollOffset: _initialDateIndex * _dateItemExtent,
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await context.read<UserDataProvider>().loadCurrentUser();
       await _loadData();
     });
   }
 
+  @override
+  void dispose() {
+    _dateScrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> _loadData() async {
+    
+
     final authProvider = Provider.of<CustomAuthProvider>(
       context,
       listen: false,
@@ -142,6 +158,23 @@ class _DiaryScreenState extends State<DiaryScreen> {
     await _loadData();
   }
 
+  Future<void> _jumpToSelectedDateInCalendar() async {
+    final today = DateTime.now();
+    final difference = _selectedDate.difference(
+      DateTime(today.year, today.month, today.day),
+    ).inDays;
+
+    final targetIndex = _initialDateIndex + difference;
+
+    if (!_dateScrollController.hasClients) return;
+
+    await _dateScrollController.animateTo(
+      targetIndex * _dateItemExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  }
+
   Future<void> _showMonthPicker() async {
     final selectedMonth = await showModalBottomSheet<int>(
       context: context,
@@ -208,6 +241,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         correctedDay,
       ),
     );
+    await _jumpToSelectedDateInCalendar();
   }
 
   Future<void> _showYearPicker() async {
@@ -267,6 +301,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         correctedDay,
       ),
     );
+    await _jumpToSelectedDateInCalendar();
   }
 
   Future<void> _saveDailyDiary() async {
@@ -415,11 +450,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
   }
 
   Widget _buildCalendar() {
-    final daysInMonth = DateTime(
-      _selectedDate.year,
-      _selectedDate.month + 1,
-      0,
-    ).day;
+    final today = DateTime.now();
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -482,25 +513,30 @@ class _DiaryScreenState extends State<DiaryScreen> {
             ),
           ),
           const SizedBox(height: 12),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(daysInMonth, (index) {
-                final day = index + 1;
-                final isSelected = day == _selectedDate.day;
+          SizedBox(
+            height: 64,
+            child: ListView.builder(
+              controller: _dateScrollController,
+              scrollDirection: Axis.horizontal,
+              itemExtent: _dateItemExtent,
+              itemBuilder: (context, index) {
+                final date = today.add(
+                  Duration(days: index - _initialDateIndex),
+                );
+
+                final isSelected =
+                    date.year == _selectedDate.year &&
+                    date.month == _selectedDate.month &&
+                    date.day == _selectedDate.day;
+
+                final isToday =
+                    date.year == today.year &&
+                    date.month == today.month &&
+                    date.day == today.day;
 
                 return GestureDetector(
-                  onTap: () {
-                    _changeDate(
-                      DateTime(
-                        _selectedDate.year,
-                        _selectedDate.month,
-                        day,
-                      ),
-                    );
-                  },
+                  onTap: () => _changeDate(date),
                   child: Container(
-                    width: 44,
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
@@ -508,26 +544,57 @@ class _DiaryScreenState extends State<DiaryScreen> {
                           ? const Color(0xFF5C5248)
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(20),
+                      border: isToday && !isSelected
+                          ? Border.all(color: const Color(0xFF5C5248))
+                          : null,
                     ),
-                    child: Text(
-                      day.toString(),
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.roboto(
-                        color: isSelected
-                            ? Colors.white
-                            : const Color(0xFF5C5248),
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          _getWeekDayName(date.weekday),
+                          style: GoogleFonts.roboto(
+                            fontSize: 12,
+                            color: isSelected
+                                ? Colors.white
+                                : Colors.grey.shade600,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          date.day.toString(),
+                          style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            color: isSelected
+                                ? Colors.white
+                                : const Color(0xFF5C5248),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 );
-              }),
+              },
             ),
           ),
         ],
       ),
     );
+  }
+
+  String _getWeekDayName(int weekday) {
+    const days = [
+      'Пн',
+      'Вт',
+      'Ср',
+      'Чт',
+      'Пт',
+      'Сб',
+      'Вс',
+    ];
+
+    return days[weekday - 1];
   }
 
   Widget _buildMacroCard() {
