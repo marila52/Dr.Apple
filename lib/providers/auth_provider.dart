@@ -39,20 +39,40 @@ class CustomAuthProvider extends ChangeNotifier {
     setError(null);
 
     try {
-      print('📝 [register] Вызываю _authService.registerWithEmail...');
-      User? user = await _authService.registerWithEmail(email, password);
-      print('📝 [register] Результат: user = ${user?.uid ?? "null"}');
+      // Прямой вызов FirebaseAuth вместо AuthService
+      UserCredential result = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: email.trim(),
+            password: password.trim(),
+          );
+      
+      print('✅ [register] Регистрация успешна! uid: ${result.user?.uid}');
+      _user = result.user;
       setLoading(false);
-      if (user != null) {
-        print('✅ [register] Регистрация успешна!');
-      } else {
-        print('⚠️ [register] user вернулся null');
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print('❌ [register] FirebaseAuthException: ${e.code}');
+      setLoading(false);
+      String message;
+      switch (e.code) {
+        case 'weak-password':
+          message = 'Слишком простой пароль';
+          break;
+        case 'email-already-in-use':
+          message = 'Этот email уже зарегистрирован';
+          break;
+        case 'invalid-email':
+          message = 'Некорректный email';
+          break;
+        default:
+          message = 'Ошибка регистрации: ${e.code}';
       }
-      return user != null;
+      setError(message);
+      return false;
     } catch (e) {
       print('❌ [register] Ошибка: $e');
       setLoading(false);
-      setError(e.toString().replaceFirst('Exception: ', ''));
+      setError(e.toString());
       return false;
     }
   }
@@ -63,22 +83,48 @@ class CustomAuthProvider extends ChangeNotifier {
     setError(null);
 
     try {
-      print('🔐 [signIn] Вызываю _authService.signInWithEmail...');
-      User? user = await _authService.signInWithEmail(email, password);
-      print('🔐 [signIn] Результат: user = ${user?.uid ?? "null"}');
+      UserCredential result = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+            email: email.trim(),
+            password: password.trim(),
+          );
+      
+      print('✅ [signIn] Вход успешен! uid: ${result.user?.uid}');
+      _user = result.user;
       setLoading(false);
-      return user != null;
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print('❌ [signIn] FirebaseAuthException: ${e.code}');
+      setLoading(false);
+      String message;
+      switch (e.code) {
+        case 'user-not-found':
+          message = 'Пользователь не найден';
+          break;
+        case 'wrong-password':
+          message = 'Неверный пароль';
+          break;
+        case 'invalid-email':
+          message = 'Некорректный email';
+          break;
+        default:
+          message = 'Ошибка входа: ${e.code}';
+      }
+      setError(message);
+      return false;
     } catch (e) {
       print('❌ [signIn] Ошибка: $e');
       setLoading(false);
-      setError(e.toString().replaceFirst('Exception: ', ''));
+      setError(e.toString());
       return false;
     }
   }
 
   Future<void> signOut() async {
     print('🚪 signOut вызван');
-    await _authService.signOut();
+    await FirebaseAuth.instance.signOut();
+    _user = null;
+    notifyListeners();
   }
 
   void clearError() {

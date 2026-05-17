@@ -38,12 +38,12 @@ class ProductDao {
     });
   }
 
-  // Поиск продуктов по названию
+  // Поиск продуктов по названию (регистронезависимый)
   Future<List<Product>> searchProducts(String query) async {
     Database db = await _dbHelper.database;
     final List<Map<String, dynamic>> maps = await db.query(
       'products',
-      where: 'name LIKE ?',
+      where: 'LOWER(name) LIKE LOWER(?)',
       whereArgs: ['%$query%'],
       orderBy: 'name',
     );

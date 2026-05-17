@@ -9,23 +9,27 @@ class ProductSearchService {
   Future<List<Product>> search(String query, {int limit = 25}) async {
     final trimmed = query.trim();
     if (trimmed.isEmpty) {
-      return _productDao.getAllProducts().then((list) => list.take(limit).toList());
-    }
-
-    final local = await _productDao.searchProducts(trimmed);
-    if (local.length >= limit) {
+      // Если запрос пустой, возвращаем локальные продукты
+      final local = await _productDao.getAllProducts();
       return local.take(limit).toList();
     }
 
+    // Сначала ищем в OpenFoodFacts (API)
     try {
       final remote = await _api.searchProducts(trimmed, pageSize: limit);
-      final merged = <String, Product>{};
-      for (final p in [...local, ...remote]) {
-        merged[p.id] = p;
+      if (remote.isNotEmpty) {
+        // Сохраняем найденные продукты в локальную БД
+        for (final product in remote) {
+          await _productDao.insertProduct(product);
+        }
+        return remote;
       }
-      return merged.values.take(limit).toList();
-    } catch (_) {
-      return local;
+    } catch (e) {
+      print('Ошибка поиска в API: $e');
     }
+
+    // Если API не вернул результаты, ищем в локальной БД
+    final local = await _productDao.searchProducts(trimmed);
+    return local.take(limit).toList();
   }
 }
