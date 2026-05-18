@@ -1,0 +1,452 @@
+[
+  {
+    "id": "1",
+    "name": "Молоко 3.2%",
+    "brand": "Простоквашино",
+    "calories": 60,
+    "proteins": 3.0,
+    "fats": 3.2,
+    "carbs": 4.7
+  },
+  {
+    "id": "2",
+    "name": "Хлеб белый",
+    "brand": "Нарезной",
+    "calories": 265,
+    "proteins": 7.6,
+    "fats": 0.9,
+    "carbs": 49.0
+  },
+  {
+    "id": "3",
+    "name": "Яблоко",
+    "brand": "",
+    "calories": 52,
+    "proteins": 0.3,
+    "fats": 0.2,
+    "carbs": 14.0
+  },
+  {
+    "id": "4",
+    "name": "Банан",
+    "brand": "",
+    "calories": 89,
+    "proteins": 1.1,
+    "fats": 0.3,
+    "carbs": 23.0
+  },
+  {
+    "id": "5",
+    "name": "Апельсин",
+    "brand": "",
+    "calories": 47,
+    "proteins": 0.9,
+    "fats": 0.1,
+    "carbs": 11.8
+  },
+  {
+    "id": "6",
+    "name": "Гречка варёная",
+    "brand": "",
+    "calories": 110,
+    "proteins": 4.2,
+    "fats": 1.1,
+    "carbs": 21.0
+  },
+  {
+    "id": "7",
+    "name": "Рис варёный",
+    "brand": "",
+    "calories": 130,
+    "proteins": 2.7,
+    "fats": 0.3,
+    "carbs": 28.0
+  },
+  {
+    "id": "8",
+    "name": "Макароны отварные",
+    "brand": "",
+    "calories": 158,
+    "proteins": 5.8,
+    "fats": 0.9,
+    "carbs": 31.0
+  },
+  {
+    "id": "9",
+    "name": "Куриная грудка варёная",
+    "brand": "",
+    "calories": 165,
+    "proteins": 31.0,
+    "fats": 3.6,
+    "carbs": 0.0
+  },
+  {
+    "id": "10",
+    "name": "Говядина варёная",
+    "brand": "",
+    "calories": 250,
+    "proteins": 26.0,
+    "fats": 16.0,
+    "carbs": 0.0
+  },
+  {
+    "id": "11",
+    "name": "Яйцо куриное",
+    "brand": "",
+    "calories": 155,
+    "proteins": 12.7,
+    "fats": 10.9,
+    "carbs": 1.1
+  },
+  {
+    "id": "12",
+    "name": "Сыр твёрдый",
+    "brand": "",
+    "calories": 355,
+    "proteins": 25.0,
+    "fats": 27.0,
+    "carbs": 0.0
+  },
+  {
+    "id": "13",
+    "name": "Творог 5%",
+    "brand": "",
+    "calories": 121,
+    "proteins": 17.2,
+    "fats": 5.0,
+    "carbs": 1.8
+  },
+  {
+    "id": "14",
+    "name": "Кефир 2.5%",
+    "brand": "",
+    "calories": 54,
+    "proteins": 3.0,
+    "fats": 2.5,
+    "carbs": 4.0
+  },
+  {
+    "id": "15",
+    "name": "Йогурт натуральный",
+    "brand": "",
+    "calories": 59,
+    "proteins": 3.5,
+    "fats": 3.2,
+    "carbs": 4.7
+  },
+  {
+    "id": "16",
+    "name": "Овсяная каша на воде",
+    "brand": "",
+    "calories": 88,
+    "proteins": 3.0,
+    "fats": 1.7,
+    "carbs": 15.0
+  },
+  {
+    "id": "17",
+    "name": "Картофель варёный",
+    "brand": "",
+    "calories": 82,
+    "proteins": 2.0,
+    "fats": 0.1,
+    "carbs": 18.0
+  },
+  {
+    "id": "18",
+    "name": "Свёкла варёная",
+    "brand": "",
+    "calories": 45,
+    "proteins": 1.5,
+    "fats": 0.1,
+    "carbs": 10.0
+  },
+  {
+    "id": "19",
+    "name": "Морковь сырая",
+    "brand": "",
+    "calories": 41,
+    "proteins": 0.9,
+    "fats": 0.1,
+    "carbs": 9.6
+  },
+  {
+    "id": "20",
+    "name": "Огурец свежий",
+    "brand": "",
+    "calories": 15,
+    "proteins": 0.7,
+    "fats": 0.1,
+    "carbs": 3.1
+  },
+  {
+    "id": "21",
+    "name": "Помидор свежий",
+    "brand": "",
+    "calories": 18,
+    "proteins": 0.9,
+    "fats": 0.2,
+    "carbs": 3.9
+  },
+  {
+    "id": "22",
+    "name": "Шоколад горький",
+    "brand": "",
+    "calories": 545,
+    "proteins": 6.2,
+    "fats": 35.0,
+    "carbs": 48.0
+  },
+  {
+    "id": "23",
+    "name": "Печенье овсяное",
+    "brand": "",
+    "calories": 430,
+    "proteins": 7.0,
+    "fats": 17.0,
+    "carbs": 62.0
+  },
+  {
+    "id": "24",
+    "name": "Мёд",
+    "brand": "",
+    "calories": 329,
+    "proteins": 0.8,
+    "fats": 0.0,
+    "carbs": 81.0
+  },
+  {
+    "id": "25",
+    "name": "Орехи грецкие",
+    "brand": "",
+    "calories": 654,
+    "proteins": 15.2,
+    "fats": 65.2,
+    "carbs": 13.7
+  },
+  {
+    "id": "26",
+    "name": "Семечки подсолнечника",
+    "brand": "",
+    "calories": 584,
+    "proteins": 19.8,
+    "fats": 51.5,
+    "carbs": 11.4
+  },
+  {
+    "id": "27",
+    "name": "Свинина варёная",
+    "brand": "",
+    "calories": 245,
+    "proteins": 27.0,
+    "fats": 15.0,
+    "carbs": 0.0
+  },
+  {
+    "id": "28",
+    "name": "Рыба треска варёная",
+    "brand": "",
+    "calories": 82,
+    "proteins": 17.5,
+    "fats": 0.6,
+    "carbs": 0.0
+  },
+  {
+    "id": "29",
+    "name": "Лосось варёный",
+    "brand": "",
+    "calories": 208,
+    "proteins": 20.0,
+    "fats": 13.0,
+    "carbs": 0.0
+  },
+  {
+    "id": "30",
+    "name": "Креветки варёные",
+    "brand": "",
+    "calories": 99,
+    "proteins": 23.3,
+    "fats": 1.2,
+    "carbs": 0.5
+  },
+  {
+    "id": "31",
+    "name": "Тунец консервированный",
+    "brand": "",
+    "calories": 198,
+    "proteins": 29.0,
+    "fats": 8.0,
+    "carbs": 0.0
+  },
+  {
+    "id": "32",
+    "name": "Творожный сырок",
+    "brand": "",
+    "calories": 315,
+    "proteins": 10.0,
+    "fats": 25.0,
+    "carbs": 12.0
+  },
+  {
+    "id": "33",
+    "name": "Сгущёнка",
+    "brand": "",
+    "calories": 325,
+    "proteins": 7.0,
+    "fats": 8.5,
+    "carbs": 55.0
+  },
+  {
+    "id": "34",
+    "name": "Колбаса варёная",
+    "brand": "",
+    "calories": 280,
+    "proteins": 12.0,
+    "fats": 25.0,
+    "carbs": 0.0
+  },
+  {
+    "id": "35",
+    "name": "Майонез",
+    "brand": "",
+    "calories": 624,
+    "proteins": 1.5,
+    "fats": 67.0,
+    "carbs": 3.0
+  },
+  {
+    "id": "36",
+    "name": "Кетчуп",
+    "brand": "",
+    "calories": 103,
+    "proteins": 2.0,
+    "fats": 0.1,
+    "carbs": 25.0
+  },
+  {
+    "id": "37",
+    "name": "Соевый соус",
+    "brand": "",
+    "calories": 53,
+    "proteins": 8.0,
+    "fats": 0.5,
+    "carbs": 4.0
+  },
+  {
+    "id": "38",
+    "name": "Оливковое масло",
+    "brand": "",
+    "calories": 884,
+    "proteins": 0.0,
+    "fats": 100.0,
+    "carbs": 0.0
+  },
+  {
+    "id": "39",
+    "name": "Подсолнечное масло",
+    "brand": "",
+    "calories": 884,
+    "proteins": 0.0,
+    "fats": 100.0,
+    "carbs": 0.0
+  },
+  {
+    "id": "40",
+    "name": "Арахисовая паста",
+    "brand": "",
+    "calories": 588,
+    "proteins": 25.0,
+    "fats": 50.0,
+    "carbs": 20.0
+  },
+  {
+    "id": "41",
+    "name": "Гранола",
+    "brand": "",
+    "calories": 420,
+    "proteins": 10.0,
+    "fats": 20.0,
+    "carbs": 45.0
+  },
+  {
+    "id": "42",
+    "name": "Сухофрукты",
+    "brand": "",
+    "calories": 320,
+    "proteins": 2.5,
+    "fats": 0.5,
+    "carbs": 75.0
+  },
+  {
+    "id": "43",
+    "name": "Салат айсберг",
+    "brand": "",
+    "calories": 14,
+    "proteins": 0.9,
+    "fats": 0.1,
+    "carbs": 2.8
+  },
+  {
+    "id": "44",
+    "name": "Брокколи варёная",
+    "brand": "",
+    "calories": 35,
+    "proteins": 2.4,
+    "fats": 0.4,
+    "carbs": 5.0
+  },
+  {
+    "id": "45",
+    "name": "Цветная капуста варёная",
+    "brand": "",
+    "calories": 23,
+    "proteins": 1.6,
+    "fats": 0.3,
+    "carbs": 4.5
+  },
+  {
+    "id": "46",
+    "name": "Кабачок тушёный",
+    "brand": "",
+    "calories": 20,
+    "proteins": 0.7,
+    "fats": 0.3,
+    "carbs": 3.6
+  },
+  {
+    "id": "47",
+    "name": "Перец болгарский",
+    "brand": "",
+    "calories": 26,
+    "proteins": 1.0,
+    "fats": 0.2,
+    "carbs": 4.6
+  },
+  {
+    "id": "48",
+    "name": "Спаржа варёная",
+    "brand": "",
+    "calories": 21,
+    "proteins": 2.2,
+    "fats": 0.1,
+    "carbs": 4.0
+  },
+  {
+    "id": "49",
+    "name": "Грибы шампиньоны",
+    "brand": "",
+    "calories": 22,
+    "proteins": 3.1,
+    "fats": 0.3,
+    "carbs": 3.0
+  },
+  {
+    "id": "50",
+    "name": "Хлебцы ржаные",
+    "brand": "",
+    "calories": 310,
+    "proteins": 8.0,
+    "fats": 1.5,
+    "carbs": 55.0
+  }
+]

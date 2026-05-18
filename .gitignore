@@ -1,0 +1,25 @@
+# Зависимости
+.pub-cache/
+.packages
+pubspec.lock
+build/
+.dart_tool/
+
+# Настройки IDE
+.idea/
+.vscode/
+*.iml
+
+# Временные файлы
+.DS_Store
+*.log
+*.swp
+*.swo
+
+# Файлы окружения
+.env
+*.env
+
+# Для Flutter
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
