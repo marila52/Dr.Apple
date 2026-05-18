@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "115430402325",
+    "project_id": "drapple-lol52",
+    "storage_bucket": "drapple-lol52.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115430402325:android:ef14aee36023c6f710611c",
+        "android_client_info": {
+          "package_name": "com.lolandroid.drapple"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB89o938hURn-wf_frTPkMR7mwFDEDas9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

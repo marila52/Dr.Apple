@@ -245,7 +245,6 @@ class UserDataProvider extends ChangeNotifier {
         throw Exception('Пользователь не авторизован');
       }
 
-      // Добавляем таймаут 5 секунд на запрос к Firestore
       _currentUser = await _firestoreService
           .getUser(firebaseUser.uid)
           .timeout(const Duration(seconds: 5));

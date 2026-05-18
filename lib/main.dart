@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
-import 'firebase_options.dart';
 import 'screens/onboarding/welcome_screen.dart';
 import 'screens/home/diary_screen.dart';
 import 'providers/auth_provider.dart';
@@ -15,15 +14,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    await Firebase.initializeApp();
   } catch (e) {
     print('Firebase init error: $e');
     if (Firebase.apps.isEmpty) rethrow;
   }
 
-  runApp(const MyApp()); // Здесь const можно оставить, т.к. MyApp — константный конструктор
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,8 +40,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Dr. Apple',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-        home: const AuthChecker(), // Здесь const можно оставить
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: const AuthChecker(),
       ),
     );
   }
@@ -59,15 +58,17 @@ class AuthChecker extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
+          return const Scaffold(
             backgroundColor: AppColors.white,
-            body: const Center(child: SpiralLoader(size: 72)), // SpiralLoader, возможно, не const, убираем const перед Center? Оставим const для Center, если его конструктор константный. Если ошибка — уберите const.
+            body: Center(child: SpiralLoader(size: 72)),
           );
         }
+
         if (snapshot.hasData) {
-          return const _AuthenticatedGate(); // _AuthenticatedGate — константный конструктор (если все поля final)
+          return const _AuthenticatedGate();
         }
-        return WelcomeScreen(); // Убрали const
+
+        return const WelcomeScreen();
       },
     );
   }
@@ -91,7 +92,6 @@ class _AuthenticatedGateState extends State<_AuthenticatedGate> {
 
   Future<void> _loadProfile() async {
     try {
-      // Таймаут уже внутри UserDataProvider.loadCurrentUser
       await context.read<UserDataProvider>().loadCurrentUser();
     } catch (e) {
       print('Profile loading error: $e');
@@ -104,19 +104,18 @@ class _AuthenticatedGateState extends State<_AuthenticatedGate> {
   @override
   Widget build(BuildContext context) {
     if (!_initialized) {
-      return Scaffold(
+      return const Scaffold(
         backgroundColor: AppColors.white,
-        body: const Center(child: SpiralLoader(size: 72)),
+        body: Center(child: SpiralLoader(size: 72)),
       );
     }
 
     final user = context.watch<UserDataProvider>().currentUser;
 
-    // Если пользователь не найден или нет dailyCalories — показываем экран онбординга
     if (user == null || user.dailyCalories == null) {
-      return WelcomeScreen(); // Убрали const
+      return const WelcomeScreen();
     }
 
-    return const DiaryScreen(); // Если DiaryScreen имеет const конструктор — оставляем, иначе убираем const
+    return const DiaryScreen();
   }
 }
